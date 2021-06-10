@@ -8,7 +8,7 @@ const generateToken = (user) => {
             role: user.role
         },
         process.env.JWT_SECRET, {
-            expiresIn: '30d',
+            expiresIn: '1h',
         }
     );
 };
@@ -64,6 +64,7 @@ const isAdminOrSeller = (req, res, next) => {
 
 
 module.exports = {
+    generateToken,
     isAuth,
     isAdmin,
     isSeller,

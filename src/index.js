@@ -2,12 +2,15 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
+const userRouter = require('../routes/userRoute');
+
 const app = express();
+dotenv.config(); // getting ENV variables
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-dotenv.config(); // getting ENV variables
+app.use('/api/users', userRouter);
 
 const Options = {
     useNewUrlParser: true,
@@ -29,5 +32,5 @@ app.get('/',(req, res)=>{
 })
 
 app.listen(process.env.PORT,()=>{
-    console.log('Server is running');
+    console.log(`Server is running at ${process.env.PORT}`);
 })
