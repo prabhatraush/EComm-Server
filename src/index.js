@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
 const userRouter = require('../routes/userRoute');
+const productRoute = require('../routes/productRoute');
 
 const app = express();
 dotenv.config(); // getting ENV variables
@@ -10,7 +11,8 @@ dotenv.config(); // getting ENV variables
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/api/users', userRouter);
+app.use('/api/user', userRouter);
+app.use('/api/product', productRoute);
 
 const Options = {
     useNewUrlParser: true,

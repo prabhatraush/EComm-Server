@@ -117,7 +117,11 @@ userRouter.get('/', isAuth, isAdmin, async (req, res) => {
     res.status(200).send(users);
 });
 
-userRouter.delete('/:id', async (req, res) => {
+userRouter.put('/:id', isAuth, isAdmin, async(req, res) => {
+    
+});
+
+userRouter.delete('/:id', isAuth, isAdmin, async (req, res) => {
     const user = await User.findById(req.params.id);
     if (!user) {
         res.status(400).send({

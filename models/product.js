@@ -18,7 +18,8 @@ const reviewSchema = mongoose.Schema({
 const productSchema = mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        trim: true
     },
     slug: {
         type: String,
@@ -28,32 +29,35 @@ const productSchema = mongoose.Schema({
             return `${slugify(this.name)}-${shortid()}`;
         }
     },
-    image: {
-        type: String,
+    price: {
+        type: Number,
         required: true
     },
+    quantity: {
+        type: Number,
+        required: true
+    },
+    image: [{
+        img: {
+            type: String
+        }
+    }],
     seller: {
-        type: mongoose.Schema.Types.ObjectID,
-        ref: 'User'
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    category: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Category',
+        required: true
     },
     brand: {
         type: String,
         required: true
     }, // Brand/Company Name
-    category: {
-        type: String,
-        required: true
-    },
     description: {
         type: String,
-        required: true
-    },
-    price: {
-        type: Number,
-        required: true
-    },
-    countInStock: {
-        type: Number,
         required: true
     },
     rating: {
@@ -61,6 +65,8 @@ const productSchema = mongoose.Schema({
         required: true
     }, // Overall rating
     reviews: [reviewSchema] // array of review
-});
+},{ timestamps : true });
+
+
 
 module.exports = mongoose.model('Product', productSchema);
